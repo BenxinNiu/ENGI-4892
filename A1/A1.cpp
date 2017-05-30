@@ -32,7 +32,9 @@ display_infor(new_array[k]);
   else{  // The file contains wrong structure   restart the programm
     std::cout<<"Something wrong with the file Please try again!"<<std::endl;
     extract();
-  }}}
+  }}
+ragged.close();
+}
 
 // display the array of struct
 void display_infor(infor a){
