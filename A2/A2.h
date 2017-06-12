@@ -66,10 +66,15 @@ int shoppingBag<T>::countItem(const T& id){
 int count;
 item<T> *temp;
 for (temp=head;temp!=0&&temp->infor!=id;temp=temp->next);
-if(temp->infor==id)
+if(temp!=0)
+if(temp->infor==id){
 return temp->occurrence;
-else throw ErrorMsg ("This item is not found in the bag!!!");
+delete temp;
 }
+else{
+delete temp;
+  return 0;
+}}
 
 template<class T>
 bool shoppingBag<T>::find(const T& id){
