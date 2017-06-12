@@ -53,7 +53,7 @@ bool shoppingBag<T>::find(const T& id){
 template<class T>
 void shoppingBag<T>::addItem(const T& elements){
   for (int i=0;i<sizeof(elements)/sizeof(elements[0]);i++){
-    int occur=count_occurence(elements[i],elements);
+   int occur=0;
     head=new item<T>(elements[i],occur,head);
     if(end==0) end=head;
   }
