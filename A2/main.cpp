@@ -92,7 +92,6 @@ return 0;
 
 void instruction(){
   cout<<endl;
-  cout<<endl;
   cout<<"Select what you wish to do"<<endl;
   cout<<"A : check length of the bag"<<endl;
   cout<<"B : Find an item"<<endl;
