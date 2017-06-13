@@ -16,7 +16,9 @@ for(int i=0;i<length;i++){
 cin>>a;
 e[i]=a;
 }
+
 shoppingBag<int>* bag=new shoppingBag<int>();
+
 bag->addItem(e,length);
 cout<<"The content of bag:"<<endl;
 bag->display();
