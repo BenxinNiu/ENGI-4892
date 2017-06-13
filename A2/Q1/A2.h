@@ -39,16 +39,16 @@ msg=inMsg;
 
 
 template<class T>
-item<T>::item(const T& id, item *ptr){
+item<T>::item(const T& id, item *ptr){  // constructor
 infor=id;
 next=ptr;
 }
 
 template<class T>
-int shoppingBag<T>::size(){
-int count=0;
+int shoppingBag<T>::size(){  // get the size of shoppingBag
+int count=0;   // counter for the item in the bag
 item<T> *temp;
-for(temp=head;temp!=0;temp=temp->next)
+for(temp=head; temp!=0;temp=temp->next) // loop the bag
 count++;
 delete temp;
 return count;
@@ -56,15 +56,15 @@ return count;
 
 template<class T>
 bool shoppingBag<T>::isEmpty(){
-  return head==0;
+  return head==0;   // return true if it is empty
 }
 
 //determine the number of occurrences of a specified item in a bag
 template<class T>
-int shoppingBag<T>::countItem(const T& id){
+int shoppingBag<T>::countItem(const T& id){ // count the occurence of an item
 int count=0;
 item<T> *temp;
-for (temp=head;temp!=0;temp=temp->next)
+for (temp=head;temp!=0;temp=temp->next) // tranverse the bag
   if(temp->infor==id)
   count++;
   delete temp;
@@ -72,7 +72,7 @@ return count;
 }
 
 template<class T>
-bool shoppingBag<T>::find(const T& id){
+bool shoppingBag<T>::find(const T& id){  // see if an item exist in the bag
   item<T> *temp;
   for (temp=head; temp!=0 && (temp->infor!=id);temp=temp->next);
   if(temp!=0){
@@ -86,15 +86,15 @@ bool shoppingBag<T>::find(const T& id){
 }
 
 template<class T>
-void shoppingBag<T>::addItem(const T elements[],int size){
+void shoppingBag<T>::addItem(const T elements[],int size){  // add item in the bag
   for (int i=0;i<size;i++){
     head=new item<T>(elements[i],head);
     if(end==0) end=head;
   }
-  sort_update();
+  sort_update();   // update the occurence of item
 }
 template<class T>
-void shoppingBag<T>::removeOne(const T& id){
+void shoppingBag<T>::removeOne(const T& id){  // remove item from the bag
 if(head!=0)
 if(head==end&&id==head->infor){
   delete head;
@@ -105,6 +105,7 @@ else if(id==head->infor){
   item<T> *temp=head;
   head=head->next;
   delete temp;
+  sort_update();
 }
 else{
   item<T> *prev, *temp;
@@ -115,6 +116,7 @@ else{
     end=prev;
     delete temp;
       delete prev;
+      sort_update();  // update the occurence of item
 }
 }
 }
@@ -127,7 +129,7 @@ void shoppingBag<T>::removeAll(const T& id){
 }
 
 template<class T>
-void shoppingBag<T>::display(){
+void shoppingBag<T>::display(){  // print the content of the bag
 item<T>* temp;
 
 for(temp=head;temp!=0;temp=temp->next){
@@ -139,7 +141,7 @@ delete temp;
 }
 
 template<class T>
-void shoppingBag<T>::sort_update(){
+void shoppingBag<T>::sort_update(){  // update the occurence of the item 
 item<T> *temp;
 int o;
 for(temp=head;temp!=0;temp=temp->next)

@@ -1,4 +1,4 @@
-#include "A2.hxx"
+#include "A2.h"
 #include <iostream>
 #include <typeinfo>
 using namespace std;

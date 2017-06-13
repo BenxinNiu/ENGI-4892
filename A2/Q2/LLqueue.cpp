@@ -3,16 +3,16 @@
 using namespace std;
 
 
-task::task(int num, task *p_next, task *p_prev){
-  infor=num;
+task::task(int num, task *p_next, task *p_prev){ // task in the queue.
+  infor=num;                                      // constructor
   next=p_next;
   prev=p_prev;
 }
-LLqueue::LLqueue(task *p_head, task *p_end){
+LLqueue::LLqueue(task *p_head, task *p_end){ // contructor for queue
 head=p_head;
 end=p_end;
 }
-void LLqueue::enqueue(int e){
+void LLqueue::enqueue(int e){   // add item to the queue
 if(end!=0){
   end=new task(e,0,end);
   end->prev->next=end;
@@ -20,7 +20,7 @@ if(end!=0){
 else head=end=new task(e);
 }
 
-int LLqueue::dequeue(){
+int LLqueue::dequeue(){  // remove item from the queue
   int dequeued;
   if(head==0) throw ErrorMsg("You can not delete empty listtttttttt");
   if(head==end){
@@ -37,10 +37,10 @@ head=end=0;
   return dequeued;
 }
 
-bool LLqueue::isEmpty()const{
-  return head==0;
+bool LLqueue::isEmpty()const{  // check if the queue if empry
+  return head==0; // return true if it is empty
 }
-void LLqueue::print() const{
+void LLqueue::print() const{  // print the content of queue
   task* temp;
   for(temp=head;temp!=0;temp=temp->next){
     cout<<"The item is "<<temp->infor<<endl;

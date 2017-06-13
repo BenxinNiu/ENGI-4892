@@ -2,25 +2,25 @@
 #include "QueueStack.h"
 using namespace std;
 
-QueueStack::QueueStack(LLqueue *p_top,LLqueue *p_bot){
+QueueStack::QueueStack(LLqueue *p_top,LLqueue *p_bot){  // contrctor for stack
   top=p_top;
   bot=p_bot;
 }
-void QueueStack::push(int e){
+void QueueStack::push(int e){  // push an item to the top of the stack
   if(top!=0)
     top->enqueue(e);
 }
-int QueueStack::pop(){
+int QueueStack::pop(){  // remove from the top of stack
 int num;
   if(top!=0)
 num=top->dequeue();
 else throw ErrorMsg("The stack is empty");
 return num;
 }
-bool QueueStack::isEmpty() const{
+bool QueueStack::isEmpty() const{  // return true if the stack if empty
   return top==0;
 }
-void QueueStack::print()const {
+void QueueStack::print()const {  // print the content of stack
   top->print();
   bot->print();
 }
