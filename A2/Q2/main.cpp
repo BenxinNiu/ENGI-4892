@@ -43,7 +43,6 @@ cin>>com;
   return 0;
 }
 
-
 void instruction(){
   cout<<endl;
   cout<<"Press A to add to this lovely queue"<<endl;
