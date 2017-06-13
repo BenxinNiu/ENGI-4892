@@ -19,16 +19,32 @@ if(end!=0){
 }
 else head=end=new task(e);
 }
+
 int LLqueue::dequeue(){
   int dequeued;
-  if(head=0) throw ErrorMsg("You can not delete empty listtttttttt");
+  if(head==0) throw ErrorMsg("You can not delete empty listtttttttt");
   if(head==end){
 dequeued=head->infor;
 delete head;
 head=end=0;
   }
   else{
+    dequeued=head->infor;
     head=head->next;
-    delete head;
+    delete head->prev;
+    head->prev=0;
   }
+  return dequeued;
+}
+
+bool LLqueue::isEmpty()const{
+  return head==0;
+}
+void LLqueue::print() const{
+  task* temp;
+  for(temp=head;temp!=0;temp=temp->next){
+    cout<<"The item is "<<temp->infor<<endl;
+    cout<<endl;
+  }
+  delete temp;
 }

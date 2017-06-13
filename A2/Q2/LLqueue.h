@@ -38,9 +38,9 @@ class LLqueue : public Queue {
 public:
   LLqueue(task *p_head=0, task *p_end=0);//
   virtual void enqueue(int e) override;//
-  virtual int dequeue() override;
-  virtual bool isEmpty() const override;
-  virtual void print() const override;
+  virtual int dequeue() override;//
+  virtual bool isEmpty() const override;//
+  virtual void print() const override;//
 protected:
 task *head, *end;
 };
