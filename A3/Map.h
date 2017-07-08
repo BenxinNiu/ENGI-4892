@@ -188,7 +188,7 @@ if(information.is_open()){
   information>>num;
   tree->insert(name,num);
 }
-tree->remove("John_Diary");
+//tree->remove("John_Diary");
 tree->print();
   information.close();
 }
