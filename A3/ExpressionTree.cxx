@@ -113,9 +113,26 @@ void ExpressionTree::buildTreeFromPostfix(const string& postfix)
   // FIXME - add your implementation of the algorithm here
   //         at the end, instance variable 'tree' must point to the
   //         expression tree you've created
+  ExprNode *temp, *operandR, *operandL;
+  stack<ExprNode*> STACK;
+  istringstream st(postfix);  // creat read stream of string for postfix
+  for(string s; st >> s; ){
+  if(!isOperator(s)){   // it is not an operator
+  temp=new ExprNode(s);  // creat a new node
+    STACK.push(temp);    //push on the stack
+  }
 
-
-
+  else if(isOperator(s)){   // well it is an operator
+operandR= STACK.top();
+STACK.pop();
+operandL = STACK.top();
+STACK.pop();
+temp=new ExprNode(s,operandL,operandR);  // creat new node with two value popped from stack being its children
+    STACK.push(temp);  // push them
+  }
+}
+tree=STACK.top();
+STACK.pop();
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -152,20 +169,21 @@ void ExpressionTree::clear(ExprNode* root)
 {
   // FIXME - add your implementation of the algorithm here
   //         what type of traversal would be needed to delete nodes??
-
-
-
-}
+  if(root->left!=0) // check for left child!
+  clear(root->left);  // go to the left  recursion
+  if(root->right!=0)  // there is right child
+   clear(root->right);  // got to right   recursion
+   delete root;
+ }
 
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 int main(int ac, char* av[])
 {
-  ExpressionTree expr1("2 / ( 3 + 7 )");
-  cout << "Final evaluation: " << expr1.evaluate() << endl;
-
+  ExpressionTree expr1("3 / 2");
+  //cout << "Final evaluation: " << expr1.evaluate() << endl;
   cout << endl;
 
-  ExpressionTree expr2("2 / ( 3 - 7 ) * 5");
-  cout << "Final evaluation: " << expr2.evaluate() << endl;
+  //ExpressionTree expr2("2 / ( 3 - 7 ) * 5");
+  //cout << "Final evaluation: " << expr2.evaluate() << endl;
 }
