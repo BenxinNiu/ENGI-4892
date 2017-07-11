@@ -58,6 +58,7 @@ class ExpressionTree
     // post-condition:  the expression tree is traversed, and the final
     //                  output calculated (the tree is not modified)
     double evaluate(const ExprNode* root) const;
+
 };
 
 #endif
