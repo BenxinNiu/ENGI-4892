@@ -16,7 +16,7 @@ class HashWithChaining : public HashTable<K,V>
 {
   public:
     // c'tor (initializes hashcode lambda function and size)
-    HashWithChaining(std::function<int(K)> hc) : hashcode(hc), size(0) {
+    HashWithChaining(std::function<int(K)> hc) : hashcode(hc), size(0),items(0) {
     }
 
     // Add key/value pair to the hashtable by using 'key' to determine
@@ -55,7 +55,9 @@ class HashWithChaining : public HashTable<K,V>
     {
       cout<<"item: "<<items<<endl;
       cout<<"size: "<<size<<endl;
-      return items/size;
+      float a=size;
+      float b=capacity;
+      return a/b;
     }
 
     // pre-condition:  a valid hashtable
