@@ -29,7 +29,5 @@ std::cout<<"what's left"<<std::endl;
 queue.print();
 std::cout<<std::endl;
 }
-
-
   return 0;
 }
