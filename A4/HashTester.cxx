@@ -1,5 +1,8 @@
 #include "HashWithChaining.hxx"
 #include "HashWithQuadratic.hxx"
+#include <string>
+#include<sstream>
+#include <fstream>
 
 
 int main(int ac, char* av[])
@@ -13,7 +16,20 @@ int main(int ac, char* av[])
   //   key  = 123456789
   //   code = 13579
   // FIXME
-  std::function<int(int)> concatEven = ...
+std::function<int(int x)> concatEven =[](int x){
+  std::ostringstream str;
+  str<<x;
+  std::string st=str.str();
+  int hc=0;
+  int divisor=10000;
+  std::string new_str;
+  for(int i=0; i<st.length();i=i+2){
+    new_str=st[i];
+    hc +=divisor*(std::stoi (new_str,nullptr,10));
+    divisor=divisor/10;
+  }
+return hc;
+  };
 
   // Create a lamdba function that takes an int (the key) and returns
   // an int by taking every even-positioned digit in the key and
@@ -21,8 +37,20 @@ int main(int ac, char* av[])
   //   key  = 123456789
   //   code = 2468
   // FIXME
-  std::function<int(int)> concatOdd = ...
-
+  std::function<int(int x)> concatOdd =[](int x){
+    std::ostringstream str;
+    str<<x;
+    std::string st=str.str();
+    int hc=0;
+    int divisor=1000;
+    std::string new_str;
+    for(int i=1; i<st.length();i=i+2){
+      new_str=st[i];
+      hc+=divisor*(std::stoi (new_str,nullptr,10));
+      divisor=divisor/10;
+    }
+  return hc;
+};
   // concat even digits, chaining
   HashWithChaining<int,string> h1(concatEven);
 
@@ -38,6 +66,107 @@ int main(int ac, char* av[])
   // Read data from input file, and do inserts's and find's,
   // and gather statistics ...
   // FIXME
-
-
+  int n=0;
+std::ifstream student;
+student.open("students.txt");
+if (student.is_open()){
+  int stu_num;
+  std::string name;
+//cout<<"files opend successfully"<<endl;
+while(!student.eof()){
+student>>stu_num;
+student>>name;
+h1.insert(stu_num,name);
+h2.insert(stu_num,name);
+h4.insert(stu_num,name);
+h3.insert(stu_num,name);
 }
+student.close();
+cout<<"insert complete!"<<endl;
+}
+
+while(1>0){
+  cout<<endl<<endl;
+  cout<<"press 1 for h1 hashtable information"<<endl;
+  cout<<"press 2 for h1 hashtable information"<<endl;
+  cout<<"press 3 for h1 hashtable information"<<endl;
+  cout<<"press 4 for h1 hashtable information"<<endl;
+int input;
+cin>>input;
+switch(input){
+  case 1: h1.print();
+          cout<<endl<<endl;
+          cout<<"search 201796620"<<endl;
+          cout<<"search 201447153"<<endl;
+          cout<<"search 201447"<<endl;
+          cout<<endl;
+          cout<<"result: "<<endl;
+          if(h1.find(201796620)!=nullptr)
+          cout<<*h1.find(201796620)<<endl;
+          else cout<<"not found"<<endl;
+          if(h1.find(201447153)!=nullptr)
+          cout<<*h1.find(201447153)<<endl;
+          else cout<<"not found"<<endl;
+          if(h1.find(201447)!=nullptr)
+          cout<<*h1.find(201447)<<endl;
+          else cout<<"not found"<<endl;
+          cout<<endl;
+          cout<<"The load factor is"<<h1.loadFactor()<<endl;
+          cout<<"The totalKeysExamined is"<<h1.totalKeysExamined()<<endl;
+          break;
+          case 4: h4.print();
+                  cout<<endl<<endl;
+                  cout<<"search 201796620"<<endl;
+                  cout<<"search 201447153"<<endl;
+                  cout<<"search 201447"<<endl;
+                  cout<<endl;
+                  cout<<"result: "<<endl;
+                  if(h4.find(201796620)!=nullptr)
+                  cout<<*h4.find(201796620)<<endl;
+                  else cout<<"not found"<<endl;
+                  if(h4.find(201447153)!=nullptr)
+                  cout<<*h4.find(201447153)<<endl;
+                  else cout<<"not found"<<endl;
+                  cout<<endl;
+                  cout<<"The load factor is"<<h4.loadFactor()<<endl;
+                  cout<<"The totalKeysExamined is"<<h4.totalKeysExamined()<<endl;
+                  break;
+                  case 2: h2.print();
+                          cout<<endl<<endl;
+                          cout<<"search 201796620"<<endl;
+                          cout<<"search 201447153"<<endl;
+                          cout<<"search 201447"<<endl;
+                          cout<<endl;
+                          cout<<"result: "<<endl;
+                          if(h2.find(201796620)!=nullptr)
+                          cout<<*h2.find(201796620)<<endl;
+                          else cout<<"not found"<<endl;
+                          if(h2.find(201447153)!=nullptr)
+                          cout<<*h2.find(201447153)<<endl;
+                          else cout<<"not found"<<endl;
+                          cout<<endl;
+                          cout<<"The load factor is"<<h2.loadFactor()<<endl;
+                          cout<<"The totalKeysExamined is"<<h2.totalKeysExamined()<<endl;
+                          break;
+                          case 3: h3.print();
+                                  cout<<endl<<endl;
+                                  cout<<"search 201796620"<<endl;
+                                  cout<<"search 201447153"<<endl;
+                                  cout<<"search 201447"<<endl;
+                                  cout<<endl;
+                                  cout<<"result: "<<endl;
+                                  if(h3.find(201796620)!=nullptr)
+                                  cout<<*h3.find(201796620)<<endl;
+                                  else cout<<"not found"<<endl;
+                                  if(h3.find(201447153)!=nullptr)
+                                  cout<<*h3.find(201447153)<<endl;
+                                  else cout<<"not found"<<endl;
+                                  cout<<endl;
+                                  cout<<"The load factor is"<<h3.loadFactor()<<endl;
+                                  cout<<"The totalKeysExamined is"<<h3.totalKeysExamined()<<endl;
+                                  break;
+}
+}
+
+
+}// main
