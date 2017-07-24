@@ -3,53 +3,90 @@
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 EdgeListGraph::EdgeListGraph(const VertexCollection& v,const EdgeCollection& e)
 {
-  // FIXME
+  myVertices= v;
+  myEdges= e;
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 VertexCollection EdgeListGraph::vertices() const
 {
-  // FIXME
+return myVertices;
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 EdgeCollection EdgeListGraph::edges() const
 {
-  // FIXME
+  return myEdges;
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 EdgeCollection EdgeListGraph::incidentEdges(const Vertex& v) const
 {
-  // FIXME
+  EdgeCollection result;
+  for(int i=0; i<myEdges.size();i++)
+    if(myEdges[i].contains(v))
+    result.push_back(myEdges[i])；
+  return result;
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 bool EdgeListGraph::areAdjacent(const Vertex& v, const Vertex& w) const
 {
-  // FIXME
+  bool adj=false;
+  for(int i=0;i<myEdges.size()&&adj==false;i++)
+    if(myEdges[i].contains(v)&&myEdges[i].contains(w))
+    adj=true;
+    return adj;
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 bool EdgeListGraph::insertVertex(const Vertex& v)
 {
-  // FIXME
+  bool existing=false;
+  for(int i=0;i<myVertices.size()&&existing==false;i++)
+  if(v==myVertices[i])
+  existing=true;
+  if(existing)
+  return false;
+  else
+  myVertices.push_back(v);
+  return true;
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 bool EdgeListGraph::removeVertex(const Vertex& v)
 {
-  // FIXME
+bool found=false;
+for(int i=0;i<myVertices.size()&&found==false;i++)
+  if(v==myVertices[i]){
+  found=true;
+  myVertices.erase(i);
+  }
+return found;
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 bool EdgeListGraph::insertEdge(const Edge& e)
 {
-  // FIXME
+  bool existing=false;
+  for(int i=0;i<myEdges.size()&&existing==false;i++)
+  if(e==myEdges[i])
+  existing=true;
+  if(existing)
+  return false;
+  else
+  myEdge.push_back(v);
+  return true;
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 bool EdgeListGraph::removeEdge(const Edge& e)
 {
-  // FIXME
+  bool found=false;
+  for(int i=0;i<myEdges.size()&&found==false;i++)
+    if(v==myEdges[i]){
+    found=true;
+    myEdges.erase(i);
+    }
+  return found;
 }
