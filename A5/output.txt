@@ -1,0 +1,51 @@
+Your output must match the output from below, within reason.
+That means that the ordering may be different, depending on how
+you implement certain methods in your EdgeListGraph class.
+
+Consider the first two line of output below:
+
+  Vertices: [ a b c d e f ]
+  Edges:    [ (a, b) (a, c) (b, d) (c, d) (c, e) (d, f) (e, f) (c, f) (d, e) ]
+
+Based on your implementation, you may get something as follows:
+
+  Vertices: [ a c d b f e ]
+  Edges:    [ (c, d) (c, e) (d, f) (a, b) (c, a) (d, b) (e, f) (c, f) (d, e) ]
+
+Note that these are both the same.  They basically have some items in each
+list in a different order, and in some cases the vertex pairs are swapped.
+
+Keep this in mind when you compare your output to that below.
+
+///////////////////////////////////////////////////////////////////////////////
+
+
+Vertices: [ a b c d e f ]
+Edges:    [ (a, b) (a, c) (b, d) (c, d) (c, e) (d, f) (e, f) (c, f) (d, e) ]
+
+TEST: Incident edges to vertex c
+[ (a, c) (c, d) (c, e) (c, f) ]
+
+TEST: Remove vertex a
+Vertices: [ b c d e f ]
+Edges:    [ (b, d) (c, d) (c, e) (d, f) (e, f) (c, f) (d, e) ]
+
+TEST: Remove edge (d, f)
+Vertices: [ b c d e f ]
+Edges:    [ (b, d) (c, d) (c, e) (e, f) (c, f) (d, e) ]
+
+TEST: Remove vertex c
+Vertices: [ b d e f ]
+Edges:    [ (b, d) (e, f) (d, e) ]
+
+TEST: d adjacent to b : 1
+TEST: d adjacent to f : 0
+
+TEST: Remove vertex e
+Vertices: [ b d f ]
+Edges:    [ (b, d) ]
+
+TEST: Add edge (f, g)
+Vertices: [ b d f g ]
+Edges:    [ (b, d) (f, g) ]
+
