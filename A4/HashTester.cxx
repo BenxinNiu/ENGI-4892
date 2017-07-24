@@ -18,14 +18,14 @@ int main(int ac, char* av[])
   // FIXME
 std::function<int(int x)> concatEven =[](int x){
   std::ostringstream str;
-  str<<x;
-  std::string st=str.str();
-  int hc=0;
+  str<<x;            // read number to string
+  std::string st=str.str();// read number to string
+  int hc=0;  // the concated value
   int divisor=10000;
   std::string new_str;
-  for(int i=0; i<st.length();i=i+2){
+  for(int i=0; i<st.length();i=i+2){ // extract even position
     new_str=st[i];
-    hc +=divisor*(std::stoi (new_str,nullptr,10));
+    hc +=divisor*(std::stoi (new_str,nullptr,10)); // convert that letter to number
     divisor=divisor/10;
   }
 return hc;
@@ -44,8 +44,8 @@ return hc;
     int hc=0;
     int divisor=1000;
     std::string new_str;
-    for(int i=1; i<st.length();i=i+2){
-      new_str=st[i];
+    for(int i=1; i<st.length();i=i+2){  // same logic as above
+      new_str=st[i];                    // but use different initial value of i for odd use 1 for even use 0
       hc+=divisor*(std::stoi (new_str,nullptr,10));
       divisor=divisor/10;
     }
@@ -74,12 +74,12 @@ if (student.is_open()){
   std::string name;
 //cout<<"files opend successfully"<<endl;
 while(!student.eof()){
-student>>stu_num;
-student>>name;
-h1.insert(stu_num,name);
-h2.insert(stu_num,name);
-h4.insert(stu_num,name);
-h3.insert(stu_num,name);
+student>>stu_num;   // read from txt
+student>>name;      // read from txt
+h1.insert(stu_num,name);   // insert  information to each table
+h2.insert(stu_num,name); // insert  information to each table
+h4.insert(stu_num,name); // insert  information to each table
+h3.insert(stu_num,name); // insert  information to each table
 }
 student.close();
 cout<<"insert complete!"<<endl;
@@ -101,8 +101,8 @@ switch(input){
           cout<<"search 201447"<<endl;
           cout<<endl;
           cout<<"result: "<<endl;
-          if(h1.find(201796620)!=nullptr)
-          cout<<*h1.find(201796620)<<endl;
+          if(h1.find(201796620)!=nullptr)  // perform search
+          cout<<*h1.find(201796620)<<endl; // display result
           else cout<<"not found"<<endl;
           if(h1.find(201447153)!=nullptr)
           cout<<*h1.find(201447153)<<endl;
@@ -111,25 +111,25 @@ switch(input){
           cout<<*h1.find(201447)<<endl;
           else cout<<"not found"<<endl;
           cout<<endl;
-          cout<<"The load factor is"<<h1.loadFactor()<<endl;
+          cout<<"The load factor is"<<h1.loadFactor()<<endl;  // perform load factor calculation
           cout<<"The totalKeysExamined is"<<h1.totalKeysExamined()<<endl;
           break;
-          case 4: h4.print();
+          case 4: h4.print();    // same testing method as above
                   cout<<endl<<endl;
                   cout<<"search 201796620"<<endl;
                   cout<<"search 201447153"<<endl;
                   cout<<"search 201447"<<endl;
                   cout<<endl;
                   cout<<"result: "<<endl;
-                  if(h4.find(201796620)!=nullptr)
+                  if(h4.find(201796620)!=nullptr)     // perform search
                   cout<<*h4.find(201796620)<<endl;
                   else cout<<"not found"<<endl;
                   if(h4.find(201447153)!=nullptr)
                   cout<<*h4.find(201447153)<<endl;
                   else cout<<"not found"<<endl;
                   cout<<endl;
-                  cout<<"The load factor is"<<h4.loadFactor()<<endl;
-                  cout<<"The totalKeysExamined is"<<h4.totalKeysExamined()<<endl;
+                  cout<<"The load factor is "<<h4.loadFactor()<<endl;
+                  cout<<"The totalKeysExamined is "<<h4.totalKeysExamined()<<endl;
                   break;
                   case 2: h2.print();
                           cout<<endl<<endl;
