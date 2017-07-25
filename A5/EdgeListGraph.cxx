@@ -1,5 +1,6 @@
 #include "EdgeListGraph.hxx"
-
+#include <vector>
+using namespace std;
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 EdgeListGraph::EdgeListGraph(const VertexCollection& v,const EdgeCollection& e)
 {
@@ -10,7 +11,7 @@ EdgeListGraph::EdgeListGraph(const VertexCollection& v,const EdgeCollection& e)
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 VertexCollection EdgeListGraph::vertices() const
 {
-return myVertices;
+    return myVertices;
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -25,7 +26,7 @@ EdgeCollection EdgeListGraph::incidentEdges(const Vertex& v) const
   EdgeCollection result;
   for(int i=0; i<myEdges.size();i++)
     if(myEdges[i].contains(v))
-    result.push_back(myEdges[i])；
+    result.push_back(myEdges[i]);
   return result;
 }
 
@@ -56,13 +57,21 @@ bool EdgeListGraph::insertVertex(const Vertex& v)
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 bool EdgeListGraph::removeVertex(const Vertex& v)
 {
-bool found=false;
-for(int i=0;i<myVertices.size()&&found==false;i++)
-  if(v==myVertices[i]){
-  found=true;
-  myVertices.erase(i);
-  }
-return found;
+  bool found=false;
+  EdgeCollection del;
+  for(int i=0;i<myVertices.size()&&found==false;i++)
+    if(v==myVertices[i]){
+    found=true;
+    myVertices.erase(myVertices.begin()+i);
+    }
+  if(found){
+  for(int j=0;j<myEdges.size();j++)
+    if(myEdges[j].contains(v))
+    del.push_back(myEdges[j]);
+  for(int j=0;j<del.size();j++)
+  removeEdge(del[j]);
+}
+  return found;
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -74,9 +83,15 @@ bool EdgeListGraph::insertEdge(const Edge& e)
   existing=true;
   if(existing)
   return false;
-  else
-  myEdge.push_back(v);
+  else{
+  myEdges.push_back(e);
+  for(int i=0; i<myVertices.size(); i++)
+    if(!e.contains(myVertices[i])){
+    insertVertex(e.endVertices()[0]);
+    insertVertex(e.endVertices()[1]);
+  }
   return true;
+}
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -84,9 +99,9 @@ bool EdgeListGraph::removeEdge(const Edge& e)
 {
   bool found=false;
   for(int i=0;i<myEdges.size()&&found==false;i++)
-    if(v==myEdges[i]){
+    if(e==myEdges[i]){
     found=true;
-    myEdges.erase(i);
+    myEdges.erase(myEdges.begin()+i);
     }
   return found;
 }
